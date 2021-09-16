@@ -1,0 +1,142 @@
+# Bar
+type UnicGallery @entity {
+  # Contract address
+  id: ID!
+
+  # Decimals
+  decimals: Int!
+
+  # Name
+  name: String!
+
+  # Unic token
+  unic: Bytes!
+
+  # Symbol
+  symbol: String!
+
+  # Total xUnic supply
+  totalSupply: BigDecimal!
+
+  # Ratio xUnic per Unic
+  ratio: BigDecimal!
+
+  # xUnic minted
+  xUnicMinted: BigDecimal!
+
+  # xUnic burned
+  xUnicBurned: BigDecimal!
+
+  # Unic staked
+  unicStaked: BigDecimal!
+
+  # Unic staked USD
+  unicStakedUSD: BigDecimal!
+
+  # Unic harvested
+  unicHarvested: BigDecimal!
+
+  # Unic harvested USD
+  unicHarvestedUSD: BigDecimal!
+
+  # xUnic age
+  xUnicAge: BigDecimal!
+
+  # xUnic age destroyed
+  xUnicAgeDestroyed: BigDecimal!
+
+  # Users in the bar
+  users: [User!]! @derivedFrom(field: "bar")
+
+  # Updated at
+  updatedAt: BigInt!
+}
+
+# User
+type User @entity {
+  # ID
+  id: ID!
+
+  # UnicGallery
+  bar: UnicGallery
+
+  # xUnic (balance)
+  xUnic: BigDecimal!
+
+  # xUnic In
+  xUnicIn: BigDecimal!
+
+  # xUnic Out
+  xUnicOut: BigDecimal!
+
+  # Minted
+  xUnicMinted: BigDecimal!
+
+  # Burned
+  xUnicBurned: BigDecimal!
+
+  # xUnic offset
+  xUnicOffset: BigDecimal!
+
+  # xUnic age
+  xUnicAge: BigDecimal!
+
+  # xUnic age destroyed
+  xUnicAgeDestroyed: BigDecimal!
+
+  # Staked
+  unicStaked: BigDecimal!
+
+  # Sum of $ at time of staking
+  unicStakedUSD: BigDecimal!
+
+  # Harvested
+  unicHarvested: BigDecimal!
+
+  # Sum of $ at time of harvesting
+  unicHarvestedUSD: BigDecimal!
+
+  # To get bar pending unic (xUnic * staked / bar.totalSupply)
+
+  # unic Out
+  unicOut: BigDecimal!
+
+  # Unic In
+  unicIn: BigDecimal!
+
+  # USD Out
+  usdOut: BigDecimal!
+
+  # USD In
+  usdIn: BigDecimal!
+
+  # Updated at
+  updatedAt: BigInt!
+
+  # unic offset
+  unicOffset: BigDecimal!
+
+  # usd offset
+  usdOffset: BigDecimal!
+}
+
+# History
+enum Timeframe {
+  Day
+}
+
+type History @entity {
+  id: ID!
+  date: Int!
+  timeframe: Timeframe!
+  unicStaked: BigDecimal!
+  unicStakedUSD: BigDecimal!
+  unicHarvested: BigDecimal!
+  unicHarvestedUSD: BigDecimal!
+  xUnicAge: BigDecimal!
+  xUnicAgeDestroyed: BigDecimal!
+  xUnicMinted: BigDecimal!
+  xUnicBurned: BigDecimal!
+  xUnicSupply: BigDecimal!
+  ratio: BigDecimal!
+}
